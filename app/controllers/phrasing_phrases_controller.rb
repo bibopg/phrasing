@@ -9,10 +9,10 @@ class PhrasingPhrasesController < Phrasing.parent_controller.constantize
   before_filter :authorize_editor
 
   def index
-    params[:locale] ||= I18n.default_locale
+    member_locale = current_member.try(:language)
     query = PhrasingPhrase
     query = query.order("#{query.table_name}.key")
-    query = query.where(locale: params[:locale]) unless params[:locale].blank?
+    query = query.where(locale: member_locale)
 
     if params[:search] and !params[:search].blank?
         key_like = PhrasingPhrase.arel_table[:key].matches("%#{params[:search]}%")
