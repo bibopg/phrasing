@@ -6,3 +6,4 @@
     %li= link_to "Help", help_phrasing_phrases_path
     - if respond_to? :root_path
       %li= link_to "Home page", root_path
+  %h5= link_to current_member.email, '#'

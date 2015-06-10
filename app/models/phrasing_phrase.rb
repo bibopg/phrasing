@@ -2,6 +2,8 @@ class PhrasingPhrase < ActiveRecord::Base
 
   validates_presence_of :key, :locale
 
+  attr_accessor :member_id, :member_name
+
   validate :uniqueness_of_key_on_locale_scope, on: :create
 
   has_many :versions, dependent: :destroy, class_name: "PhrasingPhraseVersion"
@@ -33,7 +35,7 @@ class PhrasingPhrase < ActiveRecord::Base
     end
 
     def version_it
-      PhrasingPhraseVersion.create_version(id, value) if value_was != value
+      PhrasingPhraseVersion.create_version(id, value, member_id, member_name) if value_was != value
     end
-    
+
 end

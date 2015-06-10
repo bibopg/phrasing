@@ -11,13 +11,17 @@
     %br
     %table.phrase-versions
       %tr
+        %th Editor's ID
+        %th Editor
         %th Value
         %th Created_at
         %th
         %th
       - @phrasing_phrase.versions.reverse.each do |version|
         %tr
-          %td.phrasing-version-value= version.value.html_safe
-          %td.phrasing-version-created_at= version.created_at.strftime("%d-%m-%Y %H:%M:%S")
+          %td= version.member_id
+          %td= version.member_name
+          %td= version.value.html_safe
+          %td= version.created_at.strftime("%d-%m-%Y %H:%M:%S")
           %td= link_to "Revert", phrasing_phrase_path(@phrasing_phrase.id, phrasing_phrase: {value: version.value}), class: "btn btn-success", method: :put
           %td= link_to "Delete", phrasing_phrase_version_path(version.id), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' }
