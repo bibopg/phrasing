@@ -1,7 +1,7 @@
 module Phrasing
   module Serializer
     class << self
-      
+
       def import_yaml(yaml)
         number_of_changes = 0
         hash = YAML.load(yaml)
@@ -16,7 +16,7 @@ module Phrasing
             end
           end
         end
-        
+
         number_of_changes
       end
 
